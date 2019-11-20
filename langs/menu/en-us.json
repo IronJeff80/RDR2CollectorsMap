@@ -15,7 +15,7 @@
 	{"key": "menu.card_cups", "value": "Tarot Cards - Cups"},
 	{"key": "menu.card_pentacles", "value": "Tarot Cards - Pentacles"},
 	{"key": "menu.card_swords", "value": "Tarot Cards - Swords"},
-	{"key": "menu.card_wands", "value": "Tarot Cards - Wands"},	
+	{"key": "menu.card_wands", "value": "Tarot Cards - Wands"},
 	{"key": "menu.search", "value": "Search"},
 	{"key": "menu.settings", "value": "Settings"},
 	{"key": "menu.day", "value": "Cycle"},
@@ -51,5 +51,7 @@
 	{"key": "routes.invalid", "value": "Invalid route. Check console for more information (F12)"},
 	{"key": "menu.random_spots", "value": "Random Spots"},
 	{"key": "menu.collectables_counter", "value": "Collected {count} of {max}"},
-	{"key": "menu.rdo_map", "value": "RDO Map"}
+	{"key": "menu.rdo_map", "value": "RDO Map"},
+	{"key": "menu.tree_map", "value": "Tree Maps"},
+	{"key": "menu.treasure_hunter", "value": "Treasure Hunters"}
 ]

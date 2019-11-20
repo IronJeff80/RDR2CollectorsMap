@@ -951,40 +951,5 @@
 		{"text": "random_item_195", "day": [1, 2, 3], "tool": "2", "icon": "random", "x": "-71.75", "y": "100.3125"},
 		{"text": "random_item_196", "day": [1, 2, 3], "tool": "2", "icon": "random", "x": "-47.9053", "y": "124.6562"},
 		{"text": "random_item_197", "day": [1, 2, 3], "tool": "2", "icon": "random", "x": "-44.1188", "y": "153.0078"}
-	],
-	"tree_map": [
-		{"text": "tree_map_01", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-119.53498268036311", "y": "53.625"},
-		{"text": "tree_map_02", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-47.6171875", "y": "112.2109375"},
-		{"text": "tree_map_03", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-63.1015625", "y": "122.359375"},
-		{"text": "tree_map_04", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-98.6328125", "y": "57.71875"},
-		{"text": "tree_map_05", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-57.1796875", "y": "126.84375"},
-		{"text": "tree_map_06", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-63.1796875", "y": "128.1640625"},
-		{"text": "tree_map_07", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-60.5625", "y": "144.1640625"},
-		{"text": "tree_map_08", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-68.90025158265648", "y": "104.2421875"},
-		{"text": "tree_map_09", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-60.796875", "y": "152.859375"},
-		{"text": "tree_map_10", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-41.7109375", "y": "116.9921875"},
-		{"text": "tree_map_11", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-80.96875", "y": "92.0859375"},
-		{"text": "tree_map_12", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-54.953125", "y": "84.578125"},
-		{"text": "tree_map_13", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "45.51450001131039", "y": "131.20049762389257"},
-		{"text": "tree_map_14", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-101.22408026755852", "y": "88.9375"},
-		{"text": "tree_map_15", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-102.6618618904755", "y": "79.82931533706275"},
-		{"text": "tree_map_16", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-39.99624119087434", "y": "139"},
-		{"text": "tree_map_17", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-89.30661729574773", "y": "86.7890625"},
-		{"text": "tree_map_18", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-75.5827385929288", "y": "91.6640625"},
-		{"text": "tree_map_19", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-64.73331118609651", "y": "104.0234375"},
-		{"text": "tree_map_20", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-61.450493460344006", "y": "96.3359375"},
-		{"text": "tree_map_21", "day": [1, 2, 3], "tool": "0", "icon": "tree_map", "x": "-67.2829409042045", "y": "89.359375"}
-],
-	"treasure_hunter": [
-		{"text": "treasure_hunter_01", "day": [1, 2, 3], "tool": "0", "icon": "treasure_hunter", "x": "-66.37510692265303", "y": "114.578125"},
-		{"text": "treasure_hunter_02", "day": [1, 2, 3], "tool": "0", "icon": "treasure_hunter", "x": "-57.20290953465374", "y": "93.96875"},
-		{"text": "treasure_hunter_03", "day": [1, 2, 3], "tool": "0", "icon": "treasure_hunter", "x": "-69.921875", "y": "94.5078125"},
-		{"text": "treasure_hunter_04", "day": [1, 2, 3], "tool": "0", "icon": "treasure_hunter", "x": "-61.28125", "y": "91.2734375"},
-		{"text": "treasure_hunter_05", "day": [1, 2, 3], "tool": "0", "icon": "treasure_hunter", "x": "-65.2734375", "y": "85.734375"},
-		{"text": "treasure_hunter_06", "day": [1, 2, 3], "tool": "0", "icon": "treasure_hunter", "x": "-57.65625", "y": "111.890625"},
-		{"text": "treasure_hunter_07", "day": [1, 2, 3], "tool": "0", "icon": "treasure_hunter", "x": "-54.8515625", "y": "123.953125"},
-		{"text": "treasure_hunter_08", "day": [1, 2, 3], "tool": "0", "icon": "treasure_hunter", "x": "-59.046875", "y": "89.859375"}
-],
-
-
+	]
 }

@@ -129,6 +129,7 @@ var MapBase = {
 
     Menu.refreshItemsCounter();
     Treasures.addToMap();
+    Encounters.addToMap();
 
     if (refreshMenu)
       Menu.refreshMenu();
@@ -184,6 +185,7 @@ var MapBase = {
         marker.isCollected = !marker.isCollected;
       }
     }
+    $('[data-type=' + itemName + ']').toggleClass('disabled');
 
     if ($("#routes").val() == 1)
       Routes.drawLines();

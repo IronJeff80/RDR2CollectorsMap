@@ -112,6 +112,7 @@ var MapBase = {
   addMarkers: function(refreshMenu = false) {
 
     itemMarkersLayer.clearLayers();
+    miscLayer.clearLayers();
 
     $.each(markers, function(key, marker) {
       //Set isVisible to false. addMarkerOnMap will set to true if needs
@@ -119,7 +120,7 @@ var MapBase = {
       marker.isCollected = collectedItems.includes(marker.text);
 
       if (marker.subdata != null)
-        if (plantsDisabled.includes(marker.subdata))
+        if (categoriesDisabledByDefault.includes(marker.subdata))
           return;
 
       MapBase.addMarkerOnMap(marker);
@@ -132,6 +133,7 @@ var MapBase = {
 
     Menu.refreshItemsCounter();
     Treasures.addToMap();
+    CondorEgg.addToMap();
     Encounters.addToMap();
 
     if (refreshMenu)
@@ -159,12 +161,12 @@ var MapBase = {
       Treasures.addToMap();
     } else {
       if (plantsCategories.includes(itemName)) {
-        if (plantsDisabled.includes(itemName)) {
-          plantsDisabled = $.grep(plantsDisabled, function(data) {
+        if (categoriesDisabledByDefault.includes(itemName)) {
+          categoriesDisabledByDefault = $.grep(categoriesDisabledByDefault, function(data) {
             return data != itemName;
           });
         } else {
-          plantsDisabled.push(itemName);
+          categoriesDisabledByDefault.push(itemName);
         }
         //TODO: only re-add plants
         MapBase.addMarkers();

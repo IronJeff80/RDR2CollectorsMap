@@ -6,20 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="./favicon.png" />
   <title>Red Dead Online - Collectors Map</title>
-  <meta name="description" content="Red Dead Online Collectors Map. Find all collectibles across the world and sell to Madam Nazar.">
-  <meta name="keywords" content="Red Dead Online, Collectors Map, Collectors Map, Map, Interactive Map, Interactive, jeanropke map, jeanropke">
+  <meta name="description"
+    content="Red Dead Online Collectors Map. Find all collectibles across the world and sell to Madam Nazar.">
+  <meta name="keywords"
+    content="Red Dead Online, Collectors Map, Collectors Map, Map, Interactive Map, Interactive, jeanropke map, jeanropke">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="assets/js/jquery.cookie.js"></script>
-  <link rel="stylesheet" href="assets/css/styles.css?nocache=116" />
+  <link rel="stylesheet" href="assets/css/styles.css?nocache=117" />
 </head>
+
 <body>
   <div class="side-menu">
     <h2>
       <span data-text="menu.collectables">Collectables</span>
       <span class="help-button">
-        <a href="https://github.com/jeanropke/RDR2CollectorsMap/wiki/RDO-Collectors-Map-User-Guide-(English)" target="_blank" class="wiki-page">[Wiki]</a>
+        <a href="https://github.com/jeanropke/RDR2CollectorsMap/wiki/RDO-Collectors-Map-User-Guide-(English)"
+          target="_blank" class="wiki-page">[Wiki]</a>
       </span>
     </h2>
     <div class="collectables-counter" data-text="menu.collectables_counter">Collected -- of --</div>
@@ -218,6 +222,10 @@
       <img class="icon" src="./assets/images/icons/grave-robber.png" />
       <span data-text="menu.grave_robber">Grave Robber</span>
     </div>
+    <div class="menu-option clickable" data-type="dog_encounter">
+      <img class="icon" src="./assets/images/icons/dog-encounter.png" />
+      <span data-text="menu.dog_encounter">Dog Encounter</span>
+    </div>
     <div class="menu-option clickable" data-type="treasure_hunter">
       <img class="icon" src="./assets/images/icons/treasure-hunter.png" />
       <span data-text="menu.treasure_hunter">Treasure Hunter</span>
@@ -292,6 +300,13 @@
         </select>
       </div>
       <div class="input-container">
+        <label for="auto-refresh" data-text="menu.auto_refresh">Auto-refresh</label>
+        <select class="input-day" id="auto-refresh">
+          <option value="true" data-text="menu.yes">Yes</option>
+          <option value="false" data-text="menu.no" selected>No</option>
+        </select>
+      </div>
+      <div class="input-container">
         <label for="reset-markers" data-text="menu.reset_markers_daily">Reset markers daily</label>
         <select class="input-day" id="reset-markers">
           <option value="true" data-text="menu.yes" selected>Yes</option>
@@ -317,7 +332,8 @@
     </div>
     <div class="issues-container">
       <h2 data-text="menu.issues">Issues</h2>
-      <a data-text="menu.report_issues" href="https://github.com/jeanropke/RDR2CollectorsMap/issues" target="_blank">Report issues here!</a>
+      <a data-text="menu.report_issues" href="https://github.com/jeanropke/RDR2CollectorsMap/issues"
+        target="_blank">Report issues here!</a>
     </div>
     <div class="hide-show-container">
       <a href="https://jeanropke.github.io/RDOMap/" target="_blank" data-text="menu.rdo_map">RDO Map</a>
@@ -329,8 +345,34 @@
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
         <input type="hidden" name="cmd" value="_donations" />
         <input type="hidden" name="business" value="X3A9DHBPW3B2A" />
-        <input type="hidden" name="currency_code" value="USD" />
-        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+        <select class="input-day" name="currency_code">
+          <option value="AUD">AUD $</option>
+          <option value="BRL">BRL R$</option>
+          <option value="CAD">CAD $</option>
+          <option value="CHF">CHF Fr.</option>
+          <option value="CZK">CZK Kč</option>
+          <option value="DKK">DKK kr.</option>
+          <option value="EUR">EUR €</option>
+          <option value="GBP">GBP £</option>
+          <option value="HKD">HKD $</option>
+          <option value="HUF">HUF Ft</option>
+          <option value="ILS">ILS ₪</option>
+          <option value="JPY">JPY ‎¥‎</option>
+          <option value="MXN">‎MXN $‎</option>
+          <option value="MYR">MYR RM</option>
+          <option value="NOK">NOK kr</option>
+          <option value="NZD">NZD $</option>
+          <option value="PHP">‎PHP ₱</option>
+          <option value="PLN">PLN gr</option>
+          <option value="RUB">RUB ₽</option>
+          <option value="SEK">SEK kr</option>
+          <option value="SGD">SGD $</option>
+          <option value="THB">THB ฿</option>
+          <option value="TWD">TWD $</option>
+          <option value="USD" selected>USD $</option>
+        </select>
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit"
+          title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
         <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
       </form>
     </div>
@@ -351,15 +393,15 @@
   <div class="lat-lng-container">
     <p></p><button id="lat-lng-container-close-button">×</button>
   </div>
-  <script src="assets/js/marker.js?nocache=116"></script>
-  <script src="assets/js/treasures.js?nocache=116"></script>
-  <script src="assets/js/condoregg.js?nocache=116"></script>
-  <script src="assets/js/encounters.js?nocache=116"></script>
-  <script src="assets/js/map.js?nocache=116"></script>
-  <script src="assets/js/language.js?nocache=116"></script>
-  <script src="assets/js/menu.js?nocache=116"></script>
-  <script src="assets/js/routes.js?nocache=116"></script>
-  <script src="assets/js/scripts.js?nocache=116"></script>
+  <script src="assets/js/marker.js?nocache=117"></script>
+  <script src="assets/js/treasures.js?nocache=117"></script>
+  <script src="assets/js/condoregg.js?nocache=117"></script>
+  <script src="assets/js/encounters.js?nocache=117"></script>
+  <script src="assets/js/map.js?nocache=117"></script>
+  <script src="assets/js/language.js?nocache=117"></script>
+  <script src="assets/js/menu.js?nocache=117"></script>
+  <script src="assets/js/routes.js?nocache=117"></script>
+  <script src="assets/js/scripts.js?nocache=117"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39999584-4"></script>
   <script>

@@ -29,7 +29,7 @@ japanese (ja.json)
   - no-one yet!
   
 korean (ko.json)
-  - no-one yet!
+  - pb29
   
 polish (pl.json)
   - githb123
@@ -50,7 +50,7 @@ russian (ru.json)
   
 chinese simplified (zh-s.json)
   - yamazakitouma
+  - qiexia
   
 chinese traditional (zh-t.json)
   - yamazakitouma
-  

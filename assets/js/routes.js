@@ -17,7 +17,7 @@ var Routes = {
         if (marker == null)
           return;
         
-        if ((!marker.isCollected && marker.amount < 10) && enabledCategories.includes(marker.category)
+        if ((Inventory.isEnabled ? !marker.isCollected && (marker.amount < Inventory.stackSize) : !marker.isCollected) && enabledCategories.includes(marker.category)
         && uniqueSearchMarkers.includes(marker) && !categoriesDisabledByDefault.includes(marker.subdata)
         && marker.tool <= parseInt(toolType)) {
           var connection = [marker.lat, marker.lng];
@@ -45,7 +45,7 @@ var Routes = {
       input = input.replace(/\r?\n|\r/g, '').replace(/\s/g, '').split(',');
 
       $.each(input, function(key, value) {
-        var _marker = markers.filter(marker => marker.text == value && (marker.day == day || marker.day.includes(day)))[0];
+        var _marker = markers.filter(marker => marker.text == value && marker.day == Cycles.data.cycles[currentCycle][marker.category])[0];
         if (_marker == null) {
           console.log(`Item not found on map: '${value}'`);
         } else {
@@ -79,7 +79,7 @@ var Routes = {
       var connections = [];
 
       $.each(customRouteConnections, function(key, item) {
-        var _marker = markers.filter(marker => marker.text == item && (marker.day == day || marker.day.includes(day)))[0];
+        var _marker = markers.filter(marker => marker.text == item && marker.day == Cycles.data.cycles[currentCycle][marker.category])[0];
         connections.push([_marker.lat, _marker.lng]);
       });
 

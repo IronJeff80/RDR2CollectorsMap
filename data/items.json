@@ -1,9 +1,6 @@
 {
 	"american_flowers": [
-		{"text": "flower_texas_bluebonnet_2", "day": "1", "tool": "0", "subdata": "texas_bluebonnet", "x": "-115.63", "y": "43.88"},
 		{"text": "flower_texas_bluebonnet_4", "day": "1", "tool": "0", "subdata": "texas_bluebonnet", "x": "-88.40625", "y": "100.9921875"},
-		{"text": "flower_texas_bluebonnet_7", "day": "1", "tool": "0", "subdata": "texas_bluebonnet", "x": "-119.40625", "y": "25.5078125"},
-		{"text": "flower_texas_bluebonnet_10", "day": "1", "tool": "0", "subdata": "texas_bluebonnet", "x": "-94.359375", "y": "89.15625"},
 		{"text": "flower_bitterweed_3", "day": "1", "tool": "0", "subdata": "bitterweed", "x": "-62.04", "y": "146.29"},
 		{"text": "flower_bitterweed_5", "day": "1", "tool": "0", "subdata": "bitterweed", "x": "-63.8984375", "y": "101.6171875"},
 		{"text": "flower_bitterweed_9", "day": "1", "tool": "0", "subdata": "bitterweed", "x": "-61.8515625", "y": "88.7890625"},
@@ -27,7 +24,6 @@
 		{"text": "flower_texas_bluebonnet_3", "day": "2", "tool": "0", "subdata": "texas_bluebonnet", "x": "-88.26", "y": "100.6"},
 		{"text": "flower_texas_bluebonnet_5", "day": "2", "tool": "0", "subdata": "texas_bluebonnet", "x": "-120.6875", "y": "18.3046875"},
 		{"text": "flower_texas_bluebonnet_6", "day": "2", "tool": "0", "subdata": "texas_bluebonnet", "x": "-123.9296875", "y": "28.484375"},
-		{"text": "flower_texas_bluebonnet_8", "day": "2", "tool": "0", "subdata": "texas_bluebonnet", "x": "-121.3046875", "y": "40.6328125"},
 		{"text": "flower_bitterweed_2", "day": "2", "tool": "0", "subdata": "bitterweed", "x": "-50.76", "y": "143.43"},
 		{"text": "flower_bitterweed_5", "day": "2", "tool": "0", "subdata": "bitterweed", "x": "-63.22", "y": "99.57"},
 		{"text": "flower_wild_rhubarb_5", "day": "2", "tool": "0", "subdata": "wild_rhubarb", "x": "-110.64", "y": "45"},
@@ -47,10 +43,8 @@
 		{"text": "flower_wisteria_5", "day": "2", "tool": "0", "subdata": "wisteria", "x": "-75.38", "y": "76.74"},
 		{"text": "flower_wisteria_7", "day": "2", "tool": "0", "subdata": "wisteria", "x": "-88.26", "y": "73.5"},
 		{"text": "flower_wisteria_8", "day": "2", "tool": "0", "subdata": "wisteria", "x": "-85.77", "y": "69.66"},
-		{"text": "flower_texas_bluebonnet", "day": "3", "tool": "0", "subdata": "texas_bluebonnet", "x": "-108.609375", "y": "23.671875", "video":"https://www.youtube.com/watch?v=IK9KWAZqcMg&t=783s"},
 		{"text": "flower_texas_bluebonnet_5", "day": "3", "tool": "0", "subdata": "texas_bluebonnet", "x": "-116.55", "y": "48.9"},
 		{"text": "flower_texas_bluebonnet_6", "day": "3", "tool": "0", "subdata": "texas_bluebonnet", "x": "-91.45", "y": "94.95"},
-		{"text": "flower_texas_bluebonnet_7", "day": "3", "tool": "0", "subdata": "texas_bluebonnet", "x": "-91.97", "y": "93.61"},
 		{"text": "flower_texas_bluebonnet_8", "day": "3", "tool": "0",  "subdata": "texas_bluebonnet", "x": "-120.3671875", "y": "31.3125"},
 		{"text": "flower_bitterweed_4", "day": "3", "tool": "0", "subdata": "bitterweed", "x": "-54.66", "y": "146.94"},
 		{"text": "flower_bitterweed_7", "day": "3", "tool": "0", "subdata": "bitterweed", "x": "-48.32", "y": "154.27"},

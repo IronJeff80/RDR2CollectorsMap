@@ -5,7 +5,8 @@
 var Layers = {
   itemMarkersLayer: new L.LayerGroup(),
   miscLayer: new L.LayerGroup(),
-  encountersLayer: new L.LayerGroup()
+  encountersLayer: new L.LayerGroup(),
+  oms: null
 };
 
 var MapBase = {
@@ -65,6 +66,12 @@ var MapBase = {
       northEast = L.latLng(25, 250),
       bounds = L.latLngBounds(southWest, northEast);
     MapBase.map.setMaxBounds(bounds);
+
+    Layers.oms = new OverlappingMarkerSpiderfier(MapBase.map, { keepSpiderfied: true });
+    Layers.oms.addListener('spiderfy', function (markers) {
+      MapBase.map.closePopup();
+    });
+
   },
 
   loadMarkers: function () {
@@ -75,9 +82,12 @@ var MapBase = {
   },
 
   setMarkers: function (data) {
-    $.each(data, function (_category, _markers) {
-      $.each(_markers, function (key, marker) {
-        markers.push(new Marker(marker.text, marker.x, marker.y, marker.tool, marker.day, _category, marker.subdata, marker.video, true));
+    $.each(data, function (_category, _cycles) {
+      $.each(_cycles, function (day, _markers) {
+        $.each(_markers, function (key, marker) {
+          markers.push(new Marker(marker.text, marker.lat, marker.lng, marker.tool, day, _category, marker.subdata, marker.video, true));
+
+        });
       });
     });
     uniqueSearchMarkers = markers;
@@ -146,10 +156,10 @@ var MapBase = {
   loadWeeklySet: function () {
     $.getJSON('data/weekly.json?nocache=' + nocache)
       .done(function (data) {
-        weeklySetData = data[weeklySet];
+        weeklySetData = data;
       });
 
-    console.log('weekly set loaded');
+    console.log('weekly sets loaded');
   },
 
   removeItemFromMap: function (itemName, category) {
@@ -180,7 +190,7 @@ var MapBase = {
 
         if (itemName == category && marker.subdata == category) {
           if (!isDisabled) {
-            if (marker.day == Cycles.data.cycles[currentCycle][marker.category]) {
+            if (marker.day == Cycles.data.cycles[Cycles.data.current][marker.category]) {
               marker.isCollected = true;
               Inventory.changeMarkerAmount(marker.subdata || marker.text, 1);
             }
@@ -189,7 +199,7 @@ var MapBase = {
             marker.canCollect = false;
           }
           else {
-            if (marker.day == Cycles.data.cycles[currentCycle][marker.category]) {
+            if (marker.day == Cycles.data.cycles[Cycles.data.current][marker.category]) {
               marker.isCollected = false;
               Inventory.changeMarkerAmount(marker.subdata || marker.text, -1);
             }
@@ -200,13 +210,13 @@ var MapBase = {
         }
         else {
           if (marker.canCollect) {
-            if (marker.day == Cycles.data.cycles[currentCycle][marker.category]) {
+            if (marker.day == Cycles.data.cycles[Cycles.data.current][marker.category]) {
               marker.isCollected = true;
               Inventory.changeMarkerAmount(marker.subdata || marker.text, 1);
             }
             marker.canCollect = false;
           } else {
-            if (marker.day == Cycles.data.cycles[currentCycle][marker.category]) {
+            if (marker.day == Cycles.data.cycles[Cycles.data.current][marker.category]) {
               marker.isCollected = false;
               Inventory.changeMarkerAmount(marker.subdata || marker.text, -1);
             }
@@ -275,7 +285,7 @@ var MapBase = {
   },
 
   addMarkerOnMap: function (marker) {
-    if (marker.day != Cycles.data.cycles[currentCycle][marker.category] && !showAllMarkers) return;
+    if (marker.day != Cycles.data.cycles[Cycles.data.current][marker.category] && !showAllMarkers) return;
 
     if (!uniqueSearchMarkers.includes(marker))
       return;
@@ -284,14 +294,14 @@ var MapBase = {
 
     if (parseInt(toolType) < parseInt(marker.tool)) return;
 
-    var isWeekly = weeklySetData.filter(weekly => {
+    var isWeekly = weeklySetData.sets[weeklySetData.current].filter(weekly => {
       return weekly.item === marker.text;
     }).length > 0;
 
     var tempMarker = L.marker([marker.lat, marker.lng], {
       opacity: marker.canCollect ? 1 : .35,
       icon: new L.Icon.DataMarkup({
-        iconUrl: './assets/images/icons/' + marker.category + '_' + (marker.category == 'random' ? 'lightgray' : MapBase.getIconColor(isWeekly ? 'weekly' : 'day_' + marker.day)) + '.png',
+        iconUrl: './assets/images/icons/' + marker.category + '_' + (marker.category == 'random' ? `lightgray_${marker.tool}` : MapBase.getIconColor(isWeekly ? 'weekly' : 'day_' + marker.day)) + '.png',
         iconSize: [35, 45],
         iconAnchor: [17, 42],
         popupAnchor: [1, -32],
@@ -304,7 +314,7 @@ var MapBase = {
     marker.isVisible = true;
 
     marker.title = (marker.category == 'random') ? Language.get("random_item.name") + marker.text.replace('random_item_', '') : Language.get(`${marker.text}.name`);
-    marker.description = Language.get(`${marker.text}_${marker.day}.desc`);;
+    marker.description = (marker.subdata == 'agarita' || marker.subdata == 'blood_flower' ? Language.get('map.night_only') : '') + Language.get(`${marker.text}_${marker.day}.desc`);
 
     tempMarker.bindPopup(MapBase.updateMarkerContent(marker))
       .on("click", function (e) {
@@ -312,6 +322,8 @@ var MapBase = {
         if (customRouteEnabled) e.target.closePopup();
       });
     Layers.itemMarkersLayer.addLayer(tempMarker);
+    if (Settings.markerCluster)
+      Layers.oms.addMarker(tempMarker);
   },
 
   save: function () {
@@ -324,7 +336,7 @@ var MapBase = {
     });
     var temp = "";
     $.each(markers, function (key, marker) {
-      if (marker.day == Cycles.data.cycles[currentCycle][marker.category] && (marker.amount > 0 || marker.isCollected))
+      if (marker.day == Cycles.data.cycles[Cycles.data.current][marker.category] && (marker.amount > 0 || marker.isCollected))
         temp += `${marker.text}:${marker.isCollected ? '1' : '0'}:${marker.amount};`;
     });
 
@@ -336,6 +348,56 @@ var MapBase = {
       });
     });
     console.log('saved');
+  },
+  gameToMap: function (lat, lng, name = "Debug Marker") {
+    //console.log(`name: ${name} // "lat": "${0.01552 * lng + -63.6}", "lng": "${0.01552 * lat + 111.29}"`);
+    //console.log(`{"text": "${name}","tool": "0","subdata": "${name}_","lat": "${0.01552 * lng + -63.6}", "lng": "${0.01552 * lat + 111.29}"},`);
+    MapBase.debugMarker((0.01552 * lng + -63.6), (0.01552 * lat + 111.29), name);
+
+    /*
+    only works with eggs
+    $.each(temp[0], function(key, value){ 
+      var index = 5;      
+      if(value.length == 12) {
+        MapBase.gameToMap(value[(index*2)].x, value[(index*2)].y, key);
+        MapBase.gameToMap(value[(index*2)+1].x, value[(index*2)+1].y, key);
+      }
+      else {
+        MapBase.gameToMap(value[index].x, value[index].y, key);
+      }
+    });
+
+
+    flowers:
+
+     $.each(flowers[0], function(key, value){ 
+      var index = 5;      
+      if(value.length == 18) {
+        MapBase.gameToMap(value[(index*3)].x, value[(index*3)].y, key);
+        MapBase.gameToMap(value[(index*3)+1].x, value[(index*3)+1].y, key);
+        MapBase.gameToMap(value[(index*3)+2].x, value[(index*3)+2].y, key);
+      }
+      if(value.length == 36) {
+        MapBase.gameToMap(value[(index*6)].x, value[(index*6)].y, key);
+        MapBase.gameToMap(value[(index*6)+1].x, value[(index*6)+1].y, key);
+        MapBase.gameToMap(value[(index*6)+2].x, value[(index*6)+2].y, key);
+        MapBase.gameToMap(value[(index*6)+3].x, value[(index*6)+3].y, key);
+        MapBase.gameToMap(value[(index*6)+4].x, value[(index*6)+4].y, key);
+        MapBase.gameToMap(value[(index*6)+5].x, value[(index*6)+5].y, key);
+      }
+      if(value.length == 54) {
+        MapBase.gameToMap(value[(index*9)].x, value[(index*9)].y, key);
+        MapBase.gameToMap(value[(index*9)+1].x, value[(index*9)+1].y, key);
+        MapBase.gameToMap(value[(index*9)+2].x, value[(index*9)+1].y, key);
+        MapBase.gameToMap(value[(index*9)+3].x, value[(index*9)+3].y, key);
+        MapBase.gameToMap(value[(index*9)+4].x, value[(index*9)+4].y, key);
+        MapBase.gameToMap(value[(index*9)+5].x, value[(index*9)+5].y, key);
+        MapBase.gameToMap(value[(index*9)+6].x, value[(index*9)+6].y, key);
+        MapBase.gameToMap(value[(index*9)+7].x, value[(index*9)+7].y, key);
+        MapBase.gameToMap(value[(index*9)+8].x, value[(index*9)+8].y, key);
+      }
+    });
+    */
   }
 };
 
@@ -391,7 +453,7 @@ MapBase.submitDebugForm = function () {
     MapBase.debugMarker(lat, lng);
 },
 
-  MapBase.debugMarker = function (lat, long) {
+  MapBase.debugMarker = function (lat, long, name = 'Debug Marker') {
     var marker = L.marker([lat, long], {
       icon: L.icon({
         iconUrl: './assets/images/icons/random_darkblue.png',
@@ -404,7 +466,7 @@ MapBase.submitDebugForm = function () {
       })
     });
 
-    marker.bindPopup(`<h1>Debug Marker</h1><p>  </p>`);
+    marker.bindPopup(`<h1>${name}</h1><p>  </p>`);
     Layers.itemMarkersLayer.addLayer(marker);
   };
 

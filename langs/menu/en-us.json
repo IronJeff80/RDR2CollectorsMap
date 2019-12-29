@@ -40,6 +40,7 @@
 	{"key": "menu.fast_travel", "value": "Fast Travel"},
 	{"key": "menu.search_placeholder", "value": "Search items. Separated by ;"},
 	{"key": "map.remove_add", "value": "Remove/Add from map"},
+	{"key": "map.night_only", "value": "Night only - 10PM to 5AM"},
 	{"key": "menu.collectables_value", "value": "Value"},
 	{"key": "menu.custom_routes", "value": "Custom routes"},
 	{"key": "menu.import_route", "value": "Import route"},
@@ -67,5 +68,6 @@
 	{"key": "menu.sell", "value": "Sell"},
 	{"key": "menu.inventory", "value": "Inventory"},
 	{"key": "menu.enable_inventory", "value": "Enable inventory"},
-	{"key": "menu.inventory_stack", "value": "Item stack size"}
+	{"key": "menu.inventory_stack", "value": "Item stack size"},
+	{"key": "menu.marker_cluster", "value": "Markers cluster"}
 ]

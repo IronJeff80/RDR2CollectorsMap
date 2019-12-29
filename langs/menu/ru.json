@@ -40,6 +40,7 @@
 	{"key": "menu.fast_travel","value": "Быстрое перемещение"},
 	{"key": "menu.search_placeholder", "value": "введите название предмета"},
 	{"key": "map.remove_add", "value": "Показать/Скрыть"},
+	{"key": "map.night_only", "value": "Растет ночью - с 22:00 до 05:00"},
 	{"key": "menu.collectables_value", "value": "Стоимость"},
 	{"key": "menu.custom_routes", "value": "Ваш маршрут"},
 	{"key": "menu.import_route", "value": "Импорт маршрута"},
@@ -65,5 +66,6 @@
 	{"key": "menu.sell", "value": "Продать набор"},
 	{"key": "menu.inventory", "value": "Инвентарь"},
 	{"key": "menu.enable_inventory", "value": "Вкл. инвентарь"},
-	{"key": "menu.inventory_stack", "value": "Макс. кол-во предметов в слоте"}
+	{"key": "menu.inventory_stack", "value": "Макс. кол-во предметов в слоте"},
+	{"key": "menu.marker_cluster", "value": "Markers cluster"}
 ]

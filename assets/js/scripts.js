@@ -1,7 +1,7 @@
 //Since Moonshiners update, R* changed how cycles works.
 //Instead of 1 cycle for each collection in the day, each collection has your own cycle.
 //Eg: Coins can be on cycle 1, Eggs on cycle 3, Flowers on 5... and so on
-var currentCycle = 9;
+var currentCycle = 15;
 var markers = [];
 var searchTerms = [];
 var uniqueSearchMarkers = [];
@@ -36,7 +36,7 @@ var customRouteEnabled = false;
 var customRouteConnections = [];
 
 var toolType = '3'; //All type of tools
-var avaliableLanguages = ['ar-ar', 'de-de', 'en-us', 'es-es', 'fr-fr', 'it-it', 'ko', 'pt-br', 'pl', 'ru', 'th-th', 'zh-s', 'zh-t'];
+var avaliableLanguages = ['ar-ar', 'de-de', 'en-us', 'es-es', 'fr-fr', 'hu-hu', 'it-it', 'ko', 'pt-br', 'pl', 'ru', 'th-th', 'zh-s', 'zh-t'];
 var lang;
 
 var nazarLocations = [];
@@ -45,17 +45,14 @@ var nazarCurrentDate;
 
 var fastTravelData;
 
-var weeklySet = 'nightwatch_set';
 var weeklySetData = [];
 var date;
-var nocache = 164;
+var nocache = 178;
 
 var wikiLanguage = [];
 
 var debugTool = null;
 var isDebug = false;
-
-var autoRefresh = false;
 
 var inventory = [];
 var tempInventory = [];
@@ -144,9 +141,7 @@ function init() {
   if (typeof $.cookie('auto-refresh') === 'undefined')
     $.cookie('auto-refresh', false, { expires: 999 });
 
-  autoRefresh = $.cookie('auto-refresh') == 'true';
-
-  $("#auto-refresh").val(autoRefresh.toString());
+  $("#auto-refresh").val(Settings.isAutoRefreshEnabled.toString());
 
   resetMarkersDaily = $.cookie('remove-markers-daily') == 'true';
   $("#reset-markers").val(resetMarkersDaily.toString());
@@ -180,6 +175,7 @@ function init() {
     $('.menu-toggle').click();
 
   $('#show-coordinates').val(Settings.isCoordsEnabled ? '1' : '0');
+  $('#marker-cluster').val(Settings.markerCluster ? '1' : '0');
   changeCursor();
 }
 
@@ -270,7 +266,7 @@ setInterval(function () {
   var countdownDate = nextGMTMidnight - new Date();
 
   if (countdownDate >= (24 * 60 * 60 * 1000) - 1000) {
-    if (autoRefresh) {
+    if (Settings.isAutoRefreshEnabled) {
       //setCurrentDayCycle();
 
       if (resetMarkersDaily) {
@@ -350,7 +346,7 @@ $('.menu-option.clickable input').on('click', function (e) {
 //change cycle by collection
 $('.menu-option.clickable input').on('change', function (e) {
   var el = $(e.target);
-  Cycles.data.cycles[currentCycle][el.attr("name")] = parseInt(el.val());
+  Cycles.data.cycles[Cycles.data.current][el.attr("name")] = parseInt(el.val());
   MapBase.addMarkers();
   Menu.refreshMenu();
 });
@@ -421,7 +417,7 @@ $("#clear-inventory").on("change", function () {
     $.each(Object.keys(inventory), function (key, value) {
       inventory[value].amount = 0;
       var marker = markers.filter(function (marker) {
-        return marker.text == value && marker.day == Cycles.data.cycles[currentCycle][marker.category];
+        return marker.text == value && marker.day == Cycles.data.cycles[Cycles.data.current][marker.category];
       })[0];
 
       if (marker != null)
@@ -518,7 +514,7 @@ $('.open-submenu').on('click', function (e) {
 //Sell collections on menu
 $('.collection-sell').on('click', function (e) {
   var collectionType = $(this).parent().parent().data('type');
-  var getMarkers = markers.filter(_m => _m.category == collectionType && _m.day == Cycles.data.cycles[currentCycle][_m.category]);
+  var getMarkers = markers.filter(_m => _m.category == collectionType && _m.day == Cycles.data.cycles[Cycles.data.current][_m.category]);
 
   $.each(getMarkers, function (key, value) {
     if (value.subdata) {
@@ -555,7 +551,14 @@ $('.menu-toggle').on('click', function () {
   $('.timer-container').toggleClass('timer-menu-opened');
   $('.counter-container').toggleClass('counter-menu-opened');
 });
-
+//Enable & disable markers cluster
+$('#marker-cluster').on("change", function () {
+  var inputValue = $('#marker-cluster').val();
+  $.cookie('marker-cluster', inputValue);
+  Settings.markerCluster = inputValue == '1';
+  MapBase.map.removeLayer(Layers.itemMarkersLayer);
+  MapBase.addMarkers();
+});
 //Inventory triggers
 //Enable & disable inventory on menu
 $('#enable-inventory').on("change", function () {

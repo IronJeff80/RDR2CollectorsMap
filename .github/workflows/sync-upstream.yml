@@ -18,4 +18,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
-          gh repo sync ${{ github.repository }} --branch main
+          gh repo sync ${{ github.repository }} --branch master
